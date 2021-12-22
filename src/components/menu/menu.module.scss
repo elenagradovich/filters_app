@@ -1,0 +1,20 @@
+.wrapper {
+  border: 2px solid turquoise;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.item {
+  font-size: 20px;
+  color: #000;
+  cursor: pointer;
+}
+
+
+.item:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.item__active {
+  font-weight: bold;
+}

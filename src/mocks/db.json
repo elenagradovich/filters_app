@@ -1,0 +1,55 @@
+{
+  "flights": [
+    {
+      "id": 1,
+      "date_start": "Wed Dec 29 2021 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "date_end": "Sun Jan 02 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "country_from": "Belarus",
+      "city_from": "Minsk",
+      "country_to": "Russia",
+      "city_to": "Moscow"
+    },
+    { "id": 2,
+      "date_start": "Wed Jan 05 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "date_end": "Fri Jan 07 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "country_from": "France",
+      "country_to": "Paris",
+      "city_from": "Belarus",
+      "city_to": "Mogilev"
+    }
+  ],
+  "hotels": [
+    {
+      "id": 1,
+      "date_start": "Wed Dec 29 2021 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "date_end": "Sun Jan 02 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "amenities": "3",
+      "country": "Russia",
+      "city": "Moscow"
+    },
+    { "id": 2,
+      "date_start": "Wed Jan 05 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "date_end": "Fri Jan 07 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "amenities": "5",
+      "country": "France",
+      "city": "Paris"
+    }
+  ],
+  "cars": [
+    {
+      "id": 1,
+      "date_start": "Wed Dec 29 2021 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "date_end": "Sun Jan 02 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "type": "economy",
+      "country": "Russia",
+      "city": "Moscow"
+    },
+    { "id": 2,
+      "date_start": "Wed Jan 05 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "date_end": "Fri Jan 07 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "type": "business",
+      "country": "France",
+      "city": "Paris"
+    }
+  ]
+}
