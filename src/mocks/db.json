@@ -2,53 +2,53 @@
   "flights": [
     {
       "id": 1,
-      "date_start": "Wed Dec 29 2021 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "date_end": "Sun Jan 02 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "country_from": "Belarus",
+      "date_start": "2021-12-29",
+      "date_end": "2022-01-02",
+      "country_from": "BY",
       "city_from": "Minsk",
-      "country_to": "Russia",
+      "country_to": "RU",
       "city_to": "Moscow"
     },
     { "id": 2,
-      "date_start": "Wed Jan 05 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "date_end": "Fri Jan 07 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "country_from": "France",
-      "country_to": "Paris",
-      "city_from": "Belarus",
+      "date_start": "2022-01-05",
+      "date_end": "2022-01-09",
+      "country_from": "FR",
+      "city_from": "Paris",
+      "country_to": "BY",
       "city_to": "Mogilev"
     }
   ],
   "hotels": [
     {
       "id": 1,
-      "date_start": "Wed Dec 29 2021 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "date_end": "Sun Jan 02 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "amenities": "3",
-      "country": "Russia",
-      "city": "Moscow"
+      "date_start": "2022-01-15",
+      "date_end": "2022-01-18",
+      "amenity": "3",
+      "country": "BY",
+      "city": "Minsk"
     },
     { "id": 2,
-      "date_start": "Wed Jan 05 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "date_end": "Fri Jan 07 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "amenities": "5",
-      "country": "France",
+      "date_start": "2021-12-20",
+      "date_end": "2021-12-29",
+      "amenity": "5",
+      "country": "FR",
       "city": "Paris"
     }
   ],
   "cars": [
     {
       "id": 1,
-      "date_start": "Wed Dec 29 2021 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "date_end": "Sun Jan 02 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "date_start": "2022-01-02",
+      "date_end": "2022-01-08",
       "type": "economy",
-      "country": "Russia",
+      "country": "RU",
       "city": "Moscow"
     },
     { "id": 2,
-      "date_start": "Wed Jan 05 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
-      "date_end": "Fri Jan 07 2022 03:24:00 GMT+0300 (Moscow Standard Time)",
+      "date_start": "2022-01-01",
+      "date_end": "2022-01-10",
       "type": "business",
-      "country": "France",
+      "country": "FR",
       "city": "Paris"
     }
   ]

@@ -8,8 +8,8 @@ function Header () {
     <header className={header.wrapper}>
       <div className="container">
         <nav className={header.nav_list}>
-          <NavLink className={header.nav__item} to={ SEARCH } exac activeStyle={{fontWeight: 'bold'}}>Search</NavLink>
-          <NavLink className={header.nav__item} to={ SEARCH_HISTORY } exac activeStyle={{fontWeight: 'bold'}}>Search history</NavLink>
+          <NavLink className={header.nav__item} to={ SEARCH } exact activeStyle={{fontWeight: 'bold'}}>Search</NavLink>
+          <NavLink className={header.nav__item} to={ SEARCH_HISTORY } exact activeStyle={{fontWeight: 'bold'}}>Search history</NavLink>
         </nav>
       </div>
     </header>

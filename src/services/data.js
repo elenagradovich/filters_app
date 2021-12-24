@@ -1,8 +1,8 @@
 import * as apiUrls from '../constants/api-urls';
 import * as baseService from './base-service';
 
-export const getData = async (query) => {
-  const url = apiUrls.getOffersLink(query);
+export const getData = async (params, type) => {
+  const url = apiUrls.getOffersLink(params, type);
   return baseService.get(url);
 };
 

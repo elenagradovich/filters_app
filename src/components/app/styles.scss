@@ -39,13 +39,57 @@ li {
 }
 
 .button {
-  padding: 10px;
-  border: 1px solid turquoise;
+  padding: 10px 20px;
+  border: 1px solid #a9f0e9;
   border-radius: 10px;
-  background-color: turquoise;
+  background-color: #a9f0e9;
   color: #000;
-  margin: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
   cursor: pointer;
+
+  &--disabled {
+    cursor: default;
+    opacity: 0.3;
+  }
+
+  &--delete {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    width: 16px;
+    height: 16px;
+    opacity: 0.3;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:before {
+      position: absolute;
+      content: ' ';
+      height: 16px;
+      width: 2px;
+      top: 0;
+      background-color: #333;
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      position: absolute;
+      content: ' ';
+      height: 16px;
+      width: 2px;
+      top: 0;
+      background-color: #333;
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.error {
+  color: red;
+  font-weight: bold;
 }
 
 @media (max-width: 500px) {

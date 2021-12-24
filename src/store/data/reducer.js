@@ -1,11 +1,15 @@
 import { ActionTypes } from '../action-types';
 import Immutable from 'seamless-immutable';
+import { MenuItems } from '../../constants/menu';
 
 const initialState = Immutable({
-  searchResults: [],
+  searchResults: null,
   historyResults: [],
   dataLoading: false,
   citiesByCountry: [],
+  citiesByCountryTo: [],
+  menuType: MenuItems.FLIGHT,
+  preselectedRequest: {},
   errorMessage: null,
 });
 
@@ -17,10 +21,10 @@ export const reducer = (state = initialState, action = {}) => {
         dataLoading: true,
       };
     }
-    case ActionTypes.DATA_LOADING_END:{
+    case ActionTypes.MENU_TYPE:{
       return {
         ...state,
-        dataLoading: false,
+        menuType: action.payload,
       };
     }
     case ActionTypes.SEARCH_RESULTS:{
@@ -39,10 +43,20 @@ export const reducer = (state = initialState, action = {}) => {
         ...state,
         citiesByCountry: action.payload,
       };
+    case ActionTypes.CITIIES_LIST_TO:
+      return {
+        ...state,
+        citiesByCountryTo: action.payload,
+      };
     case ActionTypes.ERROR:
       return {
         ...state,
         errorMessage: action.payload,
+      };
+    case ActionTypes.PRESELECTED_REQUEST:
+      return {
+        ...state,
+        preselectedRequest: action.payload,
       };
     default:
       return state;
