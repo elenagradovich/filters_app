@@ -6,7 +6,7 @@ function NotFound() {
   return (
     <div style={{fontSize: '32px', color: '#005a7e', textAlign:'center', marginTop: '10%'}}>
       <p style={{fontSize: '100px', padding: '0', margin: '0'}}>404</p>
-      <p>Страница не найдена</p>
+      <p>Page was not found</p>
       <Link
         to={ SEARCH }
         style={
@@ -23,7 +23,7 @@ function NotFound() {
             transition: 'background .3s,color .3s,text-shadow .3s'}
         }
       >
-        <span>Вернуться на главную</span>
+        <span>Back to search page</span>
       </Link>
     </div>
   );

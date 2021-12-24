@@ -19,25 +19,24 @@ function SearchResults() {
     dispatch(resetResponseData())
   }, [menuType]);
 
-  debugger
   return (
     <section className={searchResults.wrapper}>
       <ul>
         {results?.map((item, index) => {
           debugger
-          const {dateStart, dateEnd, countryFrom, countryTo, cityFrom, cityTo, amenities, type, id } = item;
+          const {dateStart, dateEnd, country, countryTo, city, cityTo, amenities, serviceСlass, id } = item;
           
           return (<li key={`result-${id}`} className={searchResults.item}>
             <p><b>{`Result ${index+1}: ${menuType.toUpperCase()}`}</b></p>
             <p>{`DATE:${dateStart}-${dateEnd}`}</p>
-            <p>{`FROM:${countryFrom}/${cityFrom}`}</p>
+            <p>{`FROM:${country}/${city}`}</p>
             {menuType === MenuItems.FLIGHT && <p>{`TO:${countryTo}/${cityTo}`}</p>}
             {menuType === MenuItems.HOTEL && <p>{`AMENITIES:${amenities} stars`}</p>}
-            {menuType === MenuItems.CAR && `TYPE:${type}`}
+            {menuType === MenuItems.CAR && `TYPE:${serviceСlass}`}
           </li>);
         })}
       </ul>
-      {results?.length === 0 && 'Данных по результатам запроса не обнаружено, попробуйте изменить парметры поиска'}
+      {results?.length === 0 && 'No data was found by the query results, try to change the search parameters'}
     </section>
   );
 }

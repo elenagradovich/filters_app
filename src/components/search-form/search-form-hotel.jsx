@@ -9,8 +9,8 @@ import { func } from 'prop-types';
 
 
 const initialFormData = {
-  countryFrom: null,
-  activeCityFrom: null,
+  country: null,
+  city: null,
   dateRange: [],
   amenity: null,
 };
@@ -27,15 +27,15 @@ function SearchFormHotel({onSubmitForm, preselectedRequest}) {
     amenity: '',
   });
 
-  const [countryFrom, setCountryFrom] = useState(preselectedRequest?.countryFrom || initialFormData.countryFrom);
-  const [activeCityFrom, setActiveCityFrom] = useState(preselectedRequest?.activeCityFrom || initialFormData.activeCityFrom);
+  const [country, setCountryFrom] = useState(preselectedRequest?.country || initialFormData.country);
+  const [city, setActiveCityFrom] = useState(preselectedRequest?.city || initialFormData.city);
   const [dateRange, setDateRange] = useState([preselectedRequest?.dateStart, preselectedRequest?.dateEnd]  || initialFormData.dateRange);
   const [amenity, setAmenity] = useState(preselectedRequest?.amenity || initialFormData.amenity);
 
   const onClearForm = (e) => {
     e.preventDefault();
-    setCountryFrom(initialFormData.countryFrom);
-    setActiveCityFrom(initialFormData.activeCityFrom);
+    setCountryFrom(initialFormData.country);
+    setActiveCityFrom(initialFormData.city);
     setDateRange(initialFormData.dateRange);
     setAmenity(initialFormData.amenity);
   };
@@ -43,13 +43,12 @@ function SearchFormHotel({onSubmitForm, preselectedRequest}) {
   const onSubmit = (e) => {
     e.preventDefault();
     const request = {
-      countryFrom,
-      activeCityFrom: activeCityFrom && activeCityFrom.toLowerCase(),
-      dateFrom: getDateInFormat(dateRange[0], DateFormat.DATE_FULL),
-      dateTo: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
+      country,
+      city: city && city.toLowerCase(),
+      dateStart: getDateInFormat(dateRange[0], DateFormat.DATE_FULL),
+      dateEnd: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
       amenity,
     };
-    debugger
     onSubmitForm(request);
   };
   return (
@@ -59,8 +58,8 @@ function SearchFormHotel({onSubmitForm, preselectedRequest}) {
         title={'Location'}
         setCountry={setCountryFrom}
         setActiveCity={setActiveCityFrom}
-        country={countryFrom}
-        activeCity={activeCityFrom}
+        country={country}
+        activeCity={city}
         errors={errors}
       />
       <DataSelect

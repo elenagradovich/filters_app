@@ -8,7 +8,7 @@ import countrySelector from './country-selector.module.scss';
 
 
 function CountrySelector({ setCountry, setActiveCity, title, country, activeCity, errors}) {
-  debugger
+  console.log('activeCity:', activeCity);
   const countries = useMemo(() => countryList().getData(), []);
   const dispatch = useDispatch();
   const cities = useSelector((state) => title === 'To' ? state.DATA.citiesByCountryTo : state.DATA.citiesByCountry);

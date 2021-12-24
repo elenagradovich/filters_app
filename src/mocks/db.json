@@ -4,18 +4,18 @@
       "id": 1,
       "date_start": "2021-12-29",
       "date_end": "2022-01-02",
-      "country_from": "BY",
-      "city_from": "Minsk",
+      "country": "BY",
+      "city": "minsk",
       "country_to": "RU",
-      "city_to": "Moscow"
+      "city_to": "moscow"
     },
     { "id": 2,
       "date_start": "2022-01-05",
       "date_end": "2022-01-09",
-      "country_from": "FR",
-      "city_from": "Paris",
+      "country": "FR",
+      "city": "paris",
       "country_to": "BY",
-      "city_to": "Mogilev"
+      "city_to": "mogilev"
     }
   ],
   "hotels": [
@@ -25,14 +25,14 @@
       "date_end": "2022-01-18",
       "amenity": "3",
       "country": "BY",
-      "city": "Minsk"
+      "city": "minsk"
     },
     { "id": 2,
       "date_start": "2021-12-20",
       "date_end": "2021-12-29",
       "amenity": "5",
       "country": "FR",
-      "city": "Paris"
+      "city": "paris"
     }
   ],
   "cars": [
@@ -40,16 +40,16 @@
       "id": 1,
       "date_start": "2022-01-02",
       "date_end": "2022-01-08",
-      "type": "economy",
+      "service_class": "economy",
       "country": "RU",
-      "city": "Moscow"
+      "city": "moscow"
     },
     { "id": 2,
       "date_start": "2022-01-01",
       "date_end": "2022-01-10",
-      "type": "business",
+      "service_class": "business",
       "country": "FR",
-      "city": "Paris"
+      "city": "paris"
     }
   ]
 }

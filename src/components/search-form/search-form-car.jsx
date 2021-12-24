@@ -1,52 +1,51 @@
 import React,  {useRef, useState} from 'react';
-import {string} from 'prop-types';
 import CountrySelector from '../country-selector/country-selector';
 import DataSelect from '../data-select/data-select';
 import Calendar from '../calendar/calendar';
 import { DateFormat } from '../../constants/calendar';
 import {getDateInFormat} from '../../utils/dates';
 import searchForm from './search-form.module.scss';
+import { func, object } from 'prop-types';
 
 const initialFormData = {
-  countryFrom: null,
-  activeCityFrom: null,
+  country: null,
+  city: null,
   dateRange: [],
-  type: null,
+  serviceСlass: null,
 };
 
 function SearchFormCar({onSubmitForm, preselectedRequest}) {
-  debugger
   const formRef = useRef();
-  const types = ['economy', 'business'];
+  const serviceСlasses = ['economy', 'business'];
   const [formIsValid, changeFormIsValid] = useState(false);
   const [errors, setErrors] = useState({
     dateStart: '',
     dateEnd: '',
     country: '',
     city: '',
-    type: '',
+    serviceСlass: '',
   });
 
-  const [countryFrom, setCountryFrom] = useState(preselectedRequest?.countryFrom || initialFormData.countryFrom);
-  const [activeCityFrom, setActiveCityFrom] = useState(preselectedRequest?.activeCityFrom || initialFormData.activeCityFrom);
+  const [country, setCountryFrom] = useState(preselectedRequest?.country || initialFormData.country);
+  const [city, setActiveCityFrom] = useState(preselectedRequest?.city || initialFormData.activeCityFrom);
   const [dateRange, setDateRange] = useState([preselectedRequest?.dateStart, preselectedRequest?.dateEnd]  || initialFormData.dateRange);
-  const [type, setType] = useState(preselectedRequest?.type || initialFormData.type);
+  const [serviceСlass, setServiceСlass] = useState(preselectedRequest?.serviceСlass || initialFormData.serviceСlass);
 
   const onClearForm = () => {
-    setCountryFrom(initialFormData.countryFrom);
-    setActiveCityFrom(initialFormData.activeCityFrom);
+    setCountryFrom(initialFormData.country);
+    setActiveCityFrom(initialFormData.city);
     setDateRange(initialFormData.dateRange);
-    setType(initialFormData.type);
+    setServiceСlass(initialFormData.serviceСlass);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     const request = {
-      countryFrom,
-      activeCityFrom: activeCityFrom && activeCityFrom.toLowerCase(),
-      dateFrom: getDateInFormat(dateRange[0], DateFormat.DATE_FULL),
-      dateTo: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
-      type,
+      country,
+      city: city && city.toLowerCase(),
+      dateStart: getDateInFormat(dateRange[0], DateFormat.DATE_FULL),
+      dateEnd: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
+      serviceСlass,
     };
     debugger
     onSubmitForm(request);
@@ -58,15 +57,15 @@ function SearchFormCar({onSubmitForm, preselectedRequest}) {
         title={'Location'}
         setCountry={setCountryFrom}
         setActiveCity={setActiveCityFrom}
-        country={countryFrom}
-        activeCity={activeCityFrom}
+        country={country}
+        activeCity={city}
         errors={errors}
       />
       <DataSelect
         title='Type'
-        setValue={setType}
-        value={type}
-        options={types}
+        setValue={setServiceСlass}
+        value={serviceСlass}
+        options={serviceСlasses}
         errors={errors}
       />
        <button className='button' onClick={(e) => onSubmit(e)}>Search</button>
@@ -76,7 +75,8 @@ function SearchFormCar({onSubmitForm, preselectedRequest}) {
 }
 
 SearchFormCar.propTypes = {
-  onSubmitForm: string,
+  onSubmitForm: func,
+  preselectedRequest: object,
 };
 
 export default SearchFormCar;

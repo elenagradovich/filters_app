@@ -11,34 +11,34 @@ import searchHistoryPage from './search-history-page.module.scss';
 
 const getContent = (obj) => {
   const {type} = obj;
-  debugger
   switch (type) {
     case MenuItems.HOTEL: {
-      const {activeCityFrom, countryFrom, dateFrom, dateTo, amenity,
+      const {city, country, dateStart, dateEnd, amenity,
         requestDate} = obj;
       return (<div>
         <p><b>{type.toUpperCase()}: {getDateInFormat(requestDate, DateFormat.DEFAULT)} </b>
-          {getDateInFormat(dateFrom, DateFormat.DATE_SLASH)}-{getDateInFormat(dateTo, DateFormat.DATE_SLASH)} 
-          <span>{toUpperFirstLetter(activeCityFrom)} {amenity}stars</span>
+          {getDateInFormat(dateStart, DateFormat.DATE_SLASH)}-{getDateInFormat(dateEnd, DateFormat.DATE_SLASH)}
+          <span>{toUpperFirstLetter(city)} {amenity}stars</span>
         </p>
       </div>);
     }
     case MenuItems.FLIGHT: {
-      const {activeCityFrom, countryFrom, activeCityTo, countryTo, dateFrom, dateTo,
+      const {city, country, cityTo, countryTo, dateStart, dateEnd,
         requestDate} = obj;
       return (<div>
         <p><b>{type.toUpperCase()}: {getDateInFormat(requestDate, DateFormat.DEFAULT)} </b>
-          {getDateInFormat(dateFrom, DateFormat.DATE_SLASH)}-{getDateInFormat(dateTo, DateFormat.DATE_SLASH)}
-          <span> From: {toUpperFirstLetter(activeCityFrom)} To: {toUpperFirstLetter(activeCityTo)} </span>
+          {getDateInFormat(dateStart, DateFormat.DATE_SLASH)}-{getDateInFormat(dateEnd, DateFormat.DATE_SLASH)}
+          <span> From: {toUpperFirstLetter(city)} To: {toUpperFirstLetter(cityTo)} </span>
         </p>
       </div>);
     }
     case MenuItems.CAR: {
-      const {activeCityFrom, countryFrom, dateFrom, dateTo, type,
+      debugger
+      const {city, country, dateStart, dateEnd, serviceСlass,
         requestDate} = obj;
       return (<div>
         <p><b>{type.toUpperCase()}: {getDateInFormat(requestDate, DateFormat.DEFAULT)} </b>
-          {getDateInFormat(dateFrom, DateFormat.DATE_SLASH)}-{getDateInFormat(dateTo, DateFormat.DATE_SLASH)} {toUpperFirstLetter(activeCityFrom)}
+          {getDateInFormat(dateStart, DateFormat.DATE_SLASH)}-{getDateInFormat(dateEnd, DateFormat.DATE_SLASH)} {toUpperFirstLetter(city)} {serviceСlass}
         </p>
       </div>);
     }

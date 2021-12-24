@@ -1,5 +1,5 @@
 import React,  {useRef, useState} from 'react';
-import {func} from 'prop-types';
+import {func, object} from 'prop-types';
 import CountrySelector from '../country-selector/country-selector';
 import Calendar from '../calendar/calendar';
 import { DateFormat } from '../../constants/calendar';
@@ -8,10 +8,10 @@ import searchForm from './search-form.module.scss';
 
 const initialFormData = {
   dateRange: [],
-  countryFrom: null,
-  activeCityFrom: null,
+  country: null,
+  city: null,
   countryTo: null,
-  activeCityTo: null,
+  cityTo: null,
 };
 
 function SearchFormFlight({onSubmitForm, preselectedRequest}) {
@@ -23,17 +23,17 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
     country: '',
     city: '',
   });
-  const [countryFrom, setCountryFrom] = useState(preselectedRequest?.countryFrom || initialFormData.countryFrom);
-  const [activeCityFrom, setActiveCityFrom] = useState(preselectedRequest?.activeCityFrom || initialFormData.activeCityFrom);
+  const [country, setCountryFrom] = useState(preselectedRequest?.country || initialFormData.country);
+  const [city, setActiveCityFrom] = useState(preselectedRequest?.city || initialFormData.city);
   const [countryTo, setCountryTo] = useState(preselectedRequest?.countryTo || initialFormData.countryTo);
-  const [activeCityTo, setActiveCityTo] = useState(preselectedRequest?.activeCityTo || initialFormData.activeCityTo);
+  const [cityTo, setActiveCityTo] = useState(preselectedRequest?.cityTo || initialFormData.cityTo);
   const [dateRange, setDateRange] = useState([preselectedRequest?.dateStart, preselectedRequest?.dateEnd]  || initialFormData.dateRange);
 
   const onClearForm = (e) => {
-    setCountryFrom(initialFormData.countryFrom);
-    setActiveCityFrom(initialFormData.activeCityFrom);
+    setCountryFrom(initialFormData.country);
+    setActiveCityFrom(initialFormData.city);
     setCountryTo(initialFormData.countryTo);
-    setActiveCityTo(initialFormData.activeCityTo);
+    setActiveCityTo(initialFormData.cityTo);
     setDateRange(initialFormData.dateRange);
     e.preventDefault();
   };
@@ -41,12 +41,12 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
   const onSubmit = (e) => {
     e.preventDefault();
     const request = {
-      countryFrom,
-      activeCityFrom: activeCityFrom && activeCityFrom.toLowerCase(),
+      country,
+      city: city && city.toLowerCase(),
       countryTo,
-      activeCityTo: activeCityTo && activeCityTo.toLowerCase(),
-      dateFrom: getDateInFormat(dateRange[0], DateFormat.DATE_FULL),
-      dateTo: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
+      cityTo: cityTo && cityTo.toLowerCase(),
+      dateStart: getDateInFormat(dateRange[0], DateFormat.DATE_FULL),
+      dateEnd: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
     };
     
     //if(formIsValid) {onSubmitForm(request);}
@@ -60,8 +60,8 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
         title='From'
         setCountry={setCountryFrom}
         setActiveCity={setActiveCityFrom}
-        country={countryFrom}
-        activeCity={activeCityFrom}
+        country={country}
+        activeCity={city}
         errors={errors}
       />
       <CountrySelector
@@ -69,7 +69,7 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
         setCountry={setCountryTo}
         setActiveCity={setActiveCityTo}
         country={countryTo}
-        activeCity={activeCityTo}
+        activeCity={cityTo}
         errors={errors}
       />
       <button className='button' onClick={(e) => onSubmit(e)}>Search</button>
@@ -80,6 +80,7 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
 
 SearchFormFlight.propTypes = {
   onSubmitForm: func,
+  preselectedRequest: object,
 };
 
 export default SearchFormFlight;

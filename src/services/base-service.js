@@ -16,7 +16,7 @@ export const get = async (url, headerData) => {
 const processResponse = async (response) => {
   if (response && response.ok) {
     const data = await response.json();
-    return humps.camelizeKeys({ ...data });
+    return {response: humps.camelizeKeys({ ...data })};
   } else if (response) {
     try {
       return humps.camelizeKeys(await response.json());
