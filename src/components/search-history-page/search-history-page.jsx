@@ -33,7 +33,6 @@ const getContent = (obj) => {
       </div>);
     }
     case MenuItems.CAR: {
-      debugger
       const {city, country, dateStart, dateEnd, serviceСlass,
         requestDate} = obj;
       return (<div>

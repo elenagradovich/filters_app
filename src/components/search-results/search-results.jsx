@@ -23,7 +23,6 @@ function SearchResults() {
     <section className={searchResults.wrapper}>
       <ul>
         {results?.map((item, index) => {
-          debugger
           const {dateStart, dateEnd, country, countryTo, city, cityTo, amenities, serviceСlass, id } = item;
           
           return (<li key={`result-${id}`} className={searchResults.item}>

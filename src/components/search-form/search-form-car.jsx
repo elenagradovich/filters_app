@@ -47,7 +47,6 @@ function SearchFormCar({onSubmitForm, preselectedRequest}) {
       dateEnd: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
       serviceСlass,
     };
-    debugger
     onSubmitForm(request);
   };
   return (

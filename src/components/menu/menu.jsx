@@ -9,7 +9,6 @@ function Menu () {
   const menuType = useSelector((state) => state.DATA.menuType);
   const dispatch = useDispatch();
   const onChangeMenuType = (value) => {
-    debugger
     dispatch(setActiveMenuType(value));
   };
 
