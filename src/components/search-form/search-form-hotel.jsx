@@ -5,7 +5,7 @@ import Calendar from '../calendar/calendar';
 import { DateFormat } from '../../constants/calendar';
 import {getDateInFormat} from '../../utils/dates';
 import searchForm from './search-form.module.scss';
-import { func } from 'prop-types';
+import { func, object } from 'prop-types';
 
 
 const initialFormData = {
@@ -85,6 +85,7 @@ function SearchFormHotel({onSubmitForm, preselectedRequest}) {
 
 SearchFormHotel.propTypes = {
   onSubmitForm: func,
+  preselectedRequest: object,
 };
 
 export default SearchFormHotel;

@@ -26,12 +26,20 @@ function SearchFormCar({onSubmitForm, preselectedRequest}) {
     serviceСlass: '',
   });
 
+  const getDefaultDate = () => {
+    if(preselectedRequest?.dateStart && preselectedRequest?.dateEnd) {
+      return [preselectedRequest?.dateStart, preselectedRequest?.dateEnd];
+    }
+    return initialFormData.dateRange;
+  };
+
   const [country, setCountryFrom] = useState(preselectedRequest?.country || initialFormData.country);
   const [city, setActiveCityFrom] = useState(preselectedRequest?.city || initialFormData.activeCityFrom);
-  const [dateRange, setDateRange] = useState([preselectedRequest?.dateStart, preselectedRequest?.dateEnd]  || initialFormData.dateRange);
+  const [dateRange, setDateRange] = useState(getDefaultDate());
   const [serviceСlass, setServiceСlass] = useState(preselectedRequest?.serviceСlass || initialFormData.serviceСlass);
 
-  const onClearForm = () => {
+  const onClearForm = (e) => {
+    e.preventDefault();
     setCountryFrom(initialFormData.country);
     setActiveCityFrom(initialFormData.city);
     setDateRange(initialFormData.dateRange);
@@ -67,8 +75,8 @@ function SearchFormCar({onSubmitForm, preselectedRequest}) {
         options={serviceСlasses}
         errors={errors}
       />
-       <button className='button' onClick={(e) => onSubmit(e)}>Search</button>
-      <button className='button' onClick={() => onClearForm()}>Clear</button>
+      <button className='button' onClick={(e) => onSubmit(e)}>Search</button>
+      <button className='button' onClick={(e) => onClearForm(e)}>Clear</button>
     </form>
   );
 }

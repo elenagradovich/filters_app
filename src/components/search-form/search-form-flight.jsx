@@ -23,19 +23,26 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
     country: '',
     city: '',
   });
+
+  const getDefaultDate = () => {
+    if(preselectedRequest?.dateStart && preselectedRequest?.dateEnd) {
+      return [preselectedRequest?.dateStart, preselectedRequest?.dateEnd];
+    }
+    return initialFormData.dateRange;
+  };
   const [country, setCountryFrom] = useState(preselectedRequest?.country || initialFormData.country);
   const [city, setActiveCityFrom] = useState(preselectedRequest?.city || initialFormData.city);
   const [countryTo, setCountryTo] = useState(preselectedRequest?.countryTo || initialFormData.countryTo);
   const [cityTo, setActiveCityTo] = useState(preselectedRequest?.cityTo || initialFormData.cityTo);
-  const [dateRange, setDateRange] = useState([preselectedRequest?.dateStart, preselectedRequest?.dateEnd]  || initialFormData.dateRange);
+  const [dateRange, setDateRange] = useState(getDefaultDate());
 
   const onClearForm = (e) => {
+    e.preventDefault();
     setCountryFrom(initialFormData.country);
     setActiveCityFrom(initialFormData.city);
     setCountryTo(initialFormData.countryTo);
     setActiveCityTo(initialFormData.cityTo);
     setDateRange(initialFormData.dateRange);
-    e.preventDefault();
   };
 
   const onSubmit = (e) => {
@@ -48,7 +55,6 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
       dateStart: getDateInFormat(dateRange[0], DateFormat.DATE_FULL),
       dateEnd: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
     };
-    
     //if(formIsValid) {onSubmitForm(request);}
     onSubmitForm(request);
   };
@@ -73,7 +79,7 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
         errors={errors}
       />
       <button className='button' onClick={(e) => onSubmit(e)}>Search</button>
-      <button className='button' onClick={() => onClearForm()}>Clear</button>
+      <button className='button' onClick={(e) => onClearForm(e)}>Clear</button>
     </form>
   );
 }
