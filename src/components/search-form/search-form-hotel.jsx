@@ -27,9 +27,16 @@ function SearchFormHotel({onSubmitForm, preselectedRequest}) {
     amenity: '',
   });
 
+  const getDefaultDate = () => {
+    if(preselectedRequest?.dateStart && preselectedRequest?.dateEnd) {
+      return [preselectedRequest?.dateStart, preselectedRequest?.dateEnd];
+    }
+    return initialFormData.dateRange;
+  };
+
   const [country, setCountryFrom] = useState(preselectedRequest?.country || initialFormData.country);
   const [city, setActiveCityFrom] = useState(preselectedRequest?.city || initialFormData.city);
-  const [dateRange, setDateRange] = useState([preselectedRequest?.dateStart, preselectedRequest?.dateEnd]  || initialFormData.dateRange);
+  const [dateRange, setDateRange] = useState(getDefaultDate());
   const [amenity, setAmenity] = useState(preselectedRequest?.amenity || initialFormData.amenity);
 
   const onClearForm = (e) => {

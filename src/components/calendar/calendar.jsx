@@ -8,7 +8,7 @@ import calendar from './calendar.module.scss';
 function Calendar ({ setDateRange, dateRange, errors }) {
   const dateRef = useRef();
   const flatpickrRef = useRef();
-  const [range, setRange] = useState([]);
+  const [range, setRange] = useState(dateRange);
 
   const clearDate = () => {
     flatpickrRef.current.flatpickr.clear();
@@ -43,8 +43,9 @@ function Calendar ({ setDateRange, dateRange, errors }) {
             placeholder = {'Choose date...'}
             options={{
               plugins: [new rangePlugin({ input: '#secondRangeInput' })],
-              minDate: 'today',
+              //minDate: 'today',
               dateFormat: 'Y-m-d',
+              defaultDate: dateRange,
             }}
           />
         </label>

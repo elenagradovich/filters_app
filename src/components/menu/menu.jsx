@@ -3,6 +3,7 @@ import {func, string} from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { MenuItems } from '../../constants/menu';
 import { setActiveMenuType } from '../../store/actions';
+import {resetRequestData } from '../../store/actions';
 import menu from './menu.module.scss';
 
 function Menu () {
@@ -19,7 +20,10 @@ function Menu () {
           const item = MenuItems[key];
           const isActiveItem = menuType === item;
           return <li
-            onClick={() => onChangeMenuType(item)}
+            onClick={() => {
+              onChangeMenuType(item);
+              dispatch(resetRequestData());
+            }}
             key={key} 
             className={`${menu.item} ${isActiveItem ? menu.item__active : ''}`}
             >{item?.toUpperCase()}</li>

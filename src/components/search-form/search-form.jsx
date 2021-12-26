@@ -1,4 +1,4 @@
-import React from 'react';
+import React,  {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {string} from 'prop-types';
 import SearchFormFlight from './search-form-flight';
@@ -6,6 +6,7 @@ import SearchFormHotel from './search-form-hotel';
 import SearchFormCar from './search-form-car';
 import { getDataByRequest } from '../../store/actions';
 import { MenuItems } from '../../constants/menu';
+import { isObjEmpty, deleteKeys } from '../../utils/obj';
 
 const getComponentByType = (type, submitForm, preselectedRequest) => {
   const requestType = preselectedRequest?.type;
@@ -30,10 +31,16 @@ function SearchForm() {
   const dispatch = useDispatch();
   const menuType = useSelector((state) => state.DATA.menuType);
   const preselectedRequest = useSelector((state) => state.DATA.preselectedRequest);
-
   const submitForm = (request) => {
     dispatch(getDataByRequest(request, menuType));
   };
+
+  useEffect(() => {
+    if(preselectedRequest && !isObjEmpty(preselectedRequest)) {
+      const query = deleteKeys(preselectedRequest, ['type', 'requestDate', 'id']);
+      dispatch(getDataByRequest(query, menuType, false));
+    }
+  }, [preselectedRequest]);
 
   return getComponentByType(menuType, submitForm, preselectedRequest);
 }

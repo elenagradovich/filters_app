@@ -10,38 +10,42 @@ import {toUpperFirstLetter} from '../../utils/common';
 import searchHistoryPage from './search-history-page.module.scss';
 
 const getContent = (obj) => {
-  const {type} = obj;
-  switch (type) {
-    case MenuItems.HOTEL: {
-      const {city, country, dateStart, dateEnd, amenity,
-        requestDate} = obj;
-      return (<div>
-        <p><b>{type.toUpperCase()}: {getDateInFormat(requestDate, DateFormat.DEFAULT)} </b>
-          {getDateInFormat(dateStart, DateFormat.DATE_SLASH)}-{getDateInFormat(dateEnd, DateFormat.DATE_SLASH)}
-          <span>{toUpperFirstLetter(city)} {amenity}stars</span>
-        </p>
-      </div>);
+  try {
+    const {type} = obj;
+    switch (type) {
+      case MenuItems.HOTEL: {
+        const {city, country, dateStart, dateEnd, amenity,
+          requestDate} = obj;
+        return (<div>
+          <p><b>{type.toUpperCase()}: {getDateInFormat(requestDate, DateFormat.DEFAULT)} </b>
+            {getDateInFormat(dateStart, DateFormat.DATE_SLASH)}-{getDateInFormat(dateEnd, DateFormat.DATE_SLASH)}
+            <span>{toUpperFirstLetter(city)} {amenity}stars</span>
+          </p>
+        </div>);
+      }
+      case MenuItems.FLIGHT: {
+        const {city, country, cityTo, countryTo, dateStart, dateEnd,
+          requestDate} = obj;
+        return (<div>
+          <p><b>{type.toUpperCase()}: {getDateInFormat(requestDate, DateFormat.DEFAULT)} </b>
+            {getDateInFormat(dateStart, DateFormat.DATE_SLASH)}-{getDateInFormat(dateEnd, DateFormat.DATE_SLASH)}
+            <span> From: {toUpperFirstLetter(city)} To: {toUpperFirstLetter(cityTo)} </span>
+          </p>
+        </div>);
+      }
+      case MenuItems.CAR: {
+        const {city, country, dateStart, dateEnd, serviceСlass,
+          requestDate} = obj;
+        return (<div>
+          <p><b>{type.toUpperCase()}: {getDateInFormat(requestDate, DateFormat.DEFAULT)} </b>
+            {getDateInFormat(dateStart, DateFormat.DATE_SLASH)}-{getDateInFormat(dateEnd, DateFormat.DATE_SLASH)} {toUpperFirstLetter(city)} {serviceСlass}
+          </p>
+        </div>);
+      }
+      default: return Object.entries(obj).map(([key, value])=> <p>{key}:{value}</p>);
     }
-    case MenuItems.FLIGHT: {
-      const {city, country, cityTo, countryTo, dateStart, dateEnd,
-        requestDate} = obj;
-      return (<div>
-        <p><b>{type.toUpperCase()}: {getDateInFormat(requestDate, DateFormat.DEFAULT)} </b>
-          {getDateInFormat(dateStart, DateFormat.DATE_SLASH)}-{getDateInFormat(dateEnd, DateFormat.DATE_SLASH)}
-          <span> From: {toUpperFirstLetter(city)} To: {toUpperFirstLetter(cityTo)} </span>
-        </p>
-      </div>);
-    }
-    case MenuItems.CAR: {
-      const {city, country, dateStart, dateEnd, serviceСlass,
-        requestDate} = obj;
-      return (<div>
-        <p><b>{type.toUpperCase()}: {getDateInFormat(requestDate, DateFormat.DEFAULT)} </b>
-          {getDateInFormat(dateStart, DateFormat.DATE_SLASH)}-{getDateInFormat(dateEnd, DateFormat.DATE_SLASH)} {toUpperFirstLetter(city)} {serviceСlass}
-        </p>
-      </div>);
-    }
-    default: return Object.entries(obj).map(([key, value])=> <p>{key}:{value}</p>);
+  } catch (error) {
+    return <p>Response with empty/incorrect data</p>;
   }
 };
 

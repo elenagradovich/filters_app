@@ -6,3 +6,6 @@ export const deleteEmptyObjectFields = (request) => {
 export const deleteKeys = (object, keys = []) => keys.reduce(
   (o, k) => {const { [k]: _ , ...p } = o; return p;}, object);
 
+export const isObjEmpty = (obj) => obj && Object.keys(obj).length === 0 && Object.getPrototypeOf(obj) === Object.prototype;
+
+

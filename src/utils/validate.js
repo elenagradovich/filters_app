@@ -1,4 +1,3 @@
-export const validateFormElements = (setErrors, errors, request) => {
-  // Object.entries(request)
-  // return 
-}
+export const validateForm = (setErrors, errors, request, changeFormIsValid) => {
+  return '';
+};

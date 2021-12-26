@@ -1,6 +1,5 @@
 import { ActionTypes } from './action-types';
 import { getData, getCities } from '../services/data';
-import { deleteKeys } from '../utils/obj';
 import { saveToLocalStorage } from '../utils/storage';
 
 import humps from 'humps';
@@ -12,8 +11,8 @@ const { DATA_LOADING_START, CITIIES_LIST, CITIIES_LIST_TO,
   PRESELECTED_REQUEST, MENU_TYPE, ERROR} = ActionTypes;
 
 // actions
-export const getDataByRequest = (params, type, notForStorage) => async (dispatch) => {
-  !notForStorage && saveToLocalStorage(params, type);
+export const getDataByRequest = (params, type, isForStorage=true) => async (dispatch) => {
+  isForStorage && saveToLocalStorage(params, type);
   dispatch({ type: DATA_LOADING_START});
   const payload = await getData(humps.decamelizeKeys(params), type);
   dispatch({ type: DATA_LOADING_END});
@@ -72,14 +71,12 @@ export const deleteRequest = (id) => async (dispatch, getState) => {
 };
 
 export const getPreselectedRequest = (request)  => async (dispatch, getState) => {
-
   const state = getState();
   dispatch({ type: PRESELECTED_REQUEST, payload: request});
   dispatch({ type: MENU_TYPE, payload: request.type});
-  const query = deleteKeys(request, ['type', 'requestDate', 'id']);
-  getDataByRequest(query, request.type, true);
-  getCitiesByCountry(request.country);
-  if(request?.countryTo !== request.country) {
+  //await dispatch(getDataByRequest(query, request.type, false));
+  await dispatch(getCitiesByCountry(request.country));
+  if(request?.countryTo && request?.countryTo !== request.country) {
     getCitiesByCountry(request.countryTo, 'to');
   }
   const citiesByCountry = state.DATA.citiesByCountry;
@@ -87,4 +84,14 @@ export const getPreselectedRequest = (request)  => async (dispatch, getState) =>
     dispatch({ type: CITIIES_LIST_TO, payload: citiesByCountry});
   }
   browserHistory.push(RoutePath.SEARCH);
+};
+
+export const deletePreselectedRequest = () => ({
+  type: ActionTypes.PRESELECTED_REQUEST,
+  payload: {},
+});
+
+export const resetRequestData = ()  => async (dispatch) => {
+  dispatch(deletePreselectedRequest());
+  dispatch(resetResponseData());
 };
