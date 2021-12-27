@@ -1,6 +1,7 @@
 import { ActionTypes } from './action-types';
 import { getData, getCities } from '../services/data';
 import { saveToLocalStorage } from '../utils/storage';
+import { isObjEmpty } from '../utils/obj';
 
 import humps from 'humps';
 import browserHistory from '../history/browser-history';
@@ -12,12 +13,12 @@ const { DATA_LOADING_START, CITIIES_LIST, CITIIES_LIST_TO,
 
 // actions
 export const getDataByRequest = (params, type, isForStorage=true) => async (dispatch) => {
-  isForStorage && saveToLocalStorage(params, type);
   dispatch({ type: DATA_LOADING_START});
   const payload = await getData(humps.decamelizeKeys(params), type);
   dispatch({ type: DATA_LOADING_END});
   const { response, error } = payload;
   if (response) {
+    isForStorage && !isObjEmpty(response) && saveToLocalStorage(params, type);
     dispatch({ type: SEARCH_RESULTS, payload: Object.values(response)});
   } else {
     dispatch({ type: ERROR, payload: { error } });

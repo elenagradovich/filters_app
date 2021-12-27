@@ -68,7 +68,7 @@ function SearchHistoryPage() {
       <main className='container'>
         <ul>
           {results.map((resultObj)=> (<li className={searchHistoryPage.itemWrapper} key={resultObj.id}>
-            <div className={searchHistoryPage.itemWrapper}>
+            <div className={searchHistoryPage.wrapper}>
               <button className={`button button--delete ${searchHistoryPage.button}`} onClick={() => onDeleteRequestResult(resultObj.id)}></button>
               <div className={searchHistoryPage.item} onClick={() => dispatch(getPreselectedRequest(resultObj))}>
                 {getContent(resultObj)}
