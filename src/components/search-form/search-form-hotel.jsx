@@ -1,9 +1,10 @@
-import React,  {useRef, useState} from 'react';
+import React,  {useRef, useState, useEffect} from 'react';
 import CountrySelector from '../country-selector/country-selector';
 import DataSelect from '../data-select/data-select';
 import Calendar from '../calendar/calendar';
 import { DateFormat } from '../../constants/calendar';
 import {getDateInFormat} from '../../utils/dates';
+import {validateForm} from '../../utils/validate';
 import searchForm from './search-form.module.scss';
 import { func, object } from 'prop-types';
 
@@ -15,10 +16,9 @@ const initialFormData = {
   amenity: null,
 };
 
-function SearchFormHotel({onSubmitForm, preselectedRequest}) {
+function SearchFormHotel({submitForm, preselectedRequest, clearData}) {
   const formRef = useRef();
   const amenities = ['5', '4', '3', '2', '1'];
-  const [formIsValid, changeFormIsValid] = useState(false);
   const [errors, setErrors] = useState({
     dateStart: '',
     dateEnd: '',
@@ -45,6 +45,7 @@ function SearchFormHotel({onSubmitForm, preselectedRequest}) {
     setActiveCityFrom(initialFormData.city);
     setDateRange(initialFormData.dateRange);
     setAmenity(initialFormData.amenity);
+    clearData();
   };
 
   const onSubmit = (e) => {
@@ -56,7 +57,8 @@ function SearchFormHotel({onSubmitForm, preselectedRequest}) {
       dateEnd: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
       amenity,
     };
-    onSubmitForm(request);
+    const isFormValid = validateForm(setErrors, errors, request);
+    isFormValid && submitForm(request);
   };
   return (
     <form ref={formRef} className={searchForm.form}>
@@ -84,8 +86,9 @@ function SearchFormHotel({onSubmitForm, preselectedRequest}) {
 }
 
 SearchFormHotel.propTypes = {
-  onSubmitForm: func,
+  submitForm: func,
   preselectedRequest: object,
+  clearData: func,
 };
 
 export default SearchFormHotel;

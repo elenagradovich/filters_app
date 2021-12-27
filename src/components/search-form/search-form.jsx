@@ -4,25 +4,38 @@ import {string} from 'prop-types';
 import SearchFormFlight from './search-form-flight';
 import SearchFormHotel from './search-form-hotel';
 import SearchFormCar from './search-form-car';
-import { getDataByRequest } from '../../store/actions';
+import { getDataByRequest, resetRequestData, resetResponseData } from '../../store/actions';
 import { MenuItems } from '../../constants/menu';
 import { isObjEmpty, deleteKeys } from '../../utils/obj';
 
-const getComponentByType = (type, submitForm, preselectedRequest) => {
+const getComponentByType = (type, submitForm, preselectedRequest, clearData) => {
   const requestType = preselectedRequest?.type;
   switch (type) {
     case MenuItems.FLIGHT: {
       const request = (requestType === MenuItems.FLIGHT) ? preselectedRequest : {};
-      return <SearchFormFlight onSubmitForm={submitForm} preselectedRequest={request} />;
+      return (<SearchFormFlight
+        submitForm={submitForm}
+        preselectedRequest={request}
+        clearData={clearData}
+      />);
     }
     case MenuItems.HOTEL:{
       const request = (requestType === MenuItems.HOTEL) ? preselectedRequest : {};
-      return <SearchFormHotel onSubmitForm={submitForm} preselectedRequest={request} />;
+      return (<SearchFormHotel
+        submitForm={submitForm}
+        preselectedRequest={request}
+        clearData={clearData}
+      />);
     }
     case MenuItems.CAR: {
       const request = (requestType === MenuItems.CAR) ? preselectedRequest : {};
-      return <SearchFormCar onSubmitForm={submitForm} preselectedRequest={request} />;
+      return (<SearchFormCar
+        submitForm={submitForm}
+        preselectedRequest={request}
+        clearData={clearData}
+      />);
     }
+    default: return '';
   }
 };
 
@@ -35,6 +48,11 @@ function SearchForm() {
     dispatch(getDataByRequest(request, menuType));
   };
 
+  const clearData = () => {
+    dispatch(resetRequestData());
+    dispatch(resetResponseData());
+  };
+
   useEffect(() => {
     if(preselectedRequest && !isObjEmpty(preselectedRequest)) {
       const query = deleteKeys(preselectedRequest, ['type', 'requestDate', 'id']);
@@ -42,7 +60,7 @@ function SearchForm() {
     }
   }, [preselectedRequest]);
 
-  return getComponentByType(menuType, submitForm, preselectedRequest);
+  return getComponentByType(menuType, submitForm, preselectedRequest, clearData);
 }
 
 SearchForm.propTypes = {

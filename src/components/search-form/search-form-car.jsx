@@ -4,6 +4,7 @@ import DataSelect from '../data-select/data-select';
 import Calendar from '../calendar/calendar';
 import { DateFormat } from '../../constants/calendar';
 import {getDateInFormat} from '../../utils/dates';
+import {validateForm} from '../../utils/validate';
 import searchForm from './search-form.module.scss';
 import { func, object } from 'prop-types';
 
@@ -14,7 +15,7 @@ const initialFormData = {
   serviceСlass: null,
 };
 
-function SearchFormCar({onSubmitForm, preselectedRequest}) {
+function SearchFormCar({submitForm, preselectedRequest, clearData}) {
   const formRef = useRef();
   const serviceСlasses = ['economy', 'business'];
   const [formIsValid, changeFormIsValid] = useState(false);
@@ -37,13 +38,18 @@ function SearchFormCar({onSubmitForm, preselectedRequest}) {
   const [city, setActiveCityFrom] = useState(preselectedRequest?.city || initialFormData.activeCityFrom);
   const [dateRange, setDateRange] = useState(getDefaultDate());
   const [serviceСlass, setServiceСlass] = useState(preselectedRequest?.serviceСlass || initialFormData.serviceСlass);
-
+  
+  const submitRequest = (request) => {
+    formIsValid && submitForm(request);
+  };
+  
   const onClearForm = (e) => {
     e.preventDefault();
     setCountryFrom(initialFormData.country);
     setActiveCityFrom(initialFormData.city);
     setDateRange(initialFormData.dateRange);
     setServiceСlass(initialFormData.serviceСlass);
+    clearData();
   };
 
   const onSubmit = (e) => {
@@ -55,7 +61,8 @@ function SearchFormCar({onSubmitForm, preselectedRequest}) {
       dateEnd: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
       serviceСlass,
     };
-    onSubmitForm(request);
+    const isFormValid = validateForm(setErrors, errors, request);
+    isFormValid && submitForm(request);
   };
   return (
     <form ref={formRef} className={searchForm.form}>
@@ -73,6 +80,7 @@ function SearchFormCar({onSubmitForm, preselectedRequest}) {
         setValue={setServiceСlass}
         value={serviceСlass}
         options={serviceСlasses}
+        typeSelect='serviceСlass'
         errors={errors}
       />
       <button className='button' onClick={(e) => onSubmit(e)}>Search</button>
@@ -82,8 +90,9 @@ function SearchFormCar({onSubmitForm, preselectedRequest}) {
 }
 
 SearchFormCar.propTypes = {
-  onSubmitForm: func,
+  submitForm: func,
   preselectedRequest: object,
+  clearData: func,
 };
 
 export default SearchFormCar;

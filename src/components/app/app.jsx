@@ -1,6 +1,5 @@
 import React from 'react';
 import { Router as BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import Search from '../search-page/search-page';
 import SearchHistory from '../search-history-page/search-history-page';
 import NotFound from '../not-found/not-found';

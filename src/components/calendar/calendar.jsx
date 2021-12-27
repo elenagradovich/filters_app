@@ -34,8 +34,7 @@ function Calendar ({ setDateRange, dateRange, errors }) {
   return (
     <div className={calendar.wrapper}>
       <div className={calendar.field}>
-        <label><b>Start Date</b>
-          <span className='error'>{errors['dateStart'] || ''}</span>
+        <label className={calendar.fieldLabel}><b>Start Date</b>
           <Flatpickr
             ref={flatpickrRef}
             style={{ border: 'none'}}
@@ -49,9 +48,9 @@ function Calendar ({ setDateRange, dateRange, errors }) {
             }}
           />
         </label>
+        <p className='error'>{errors['dateStart']}</p>
       </div>
       <div className={calendar.field}>
-        <span className='error'>{errors['dateEnd'] || ''}</span>
         <label><b>End Date</b>
           <input
             required
@@ -65,6 +64,7 @@ function Calendar ({ setDateRange, dateRange, errors }) {
             allowinput= 'false'
           />
         </label>
+        <p className='error'>{errors['dateEnd']}</p>
       </div>
     </div>
   );
@@ -73,6 +73,7 @@ function Calendar ({ setDateRange, dateRange, errors }) {
 Calendar.propTypes = {
   setDateRange: PropTypes.func,
   dateRange: PropTypes.array,
+  errors: PropTypes.object,
 };
 
 export default Calendar;

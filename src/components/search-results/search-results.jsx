@@ -11,7 +11,8 @@ import { MenuItems } from '../../constants/menu';
 function SearchResults() {
   const menuType = useSelector((state) => state.DATA.menuType);
   const results = useSelector((state) => state.DATA.searchResults);
-
+  console.log('SearchResults results', results)
+  
   return (
     <section className={searchResults.wrapper}>
       <ul>

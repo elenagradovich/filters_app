@@ -18,3 +18,13 @@
   margin-bottom: 15px;
   border-radius: 10px;
 }
+
+.fieldLabel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.flatpickr-input[readonly] {
+  cursor: pointer;
+  width: 100%;
+}

@@ -1,9 +1,10 @@
-import React,  {useRef, useState} from 'react';
+import React,  {useRef, useState, useEffect} from 'react';
 import {func, object} from 'prop-types';
 import CountrySelector from '../country-selector/country-selector';
 import Calendar from '../calendar/calendar';
 import { DateFormat } from '../../constants/calendar';
 import {getDateInFormat} from '../../utils/dates';
+import {validateForm} from '../../utils/validate';
 import searchForm from './search-form.module.scss';
 
 const initialFormData = {
@@ -14,7 +15,7 @@ const initialFormData = {
   cityTo: null,
 };
 
-function SearchFormFlight({onSubmitForm, preselectedRequest}) {
+function SearchFormFlight({submitForm, preselectedRequest, clearData}) {
   const formRef = useRef();
   const [formIsValid, changeFormIsValid] = useState(false);
   const [errors, setErrors] = useState({
@@ -22,6 +23,8 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
     dateEnd: '',
     country: '',
     city: '',
+    countryTo: '',
+    cityTo: '',
   });
 
   const getDefaultDate = () => {
@@ -43,6 +46,7 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
     setCountryTo(initialFormData.countryTo);
     setActiveCityTo(initialFormData.cityTo);
     setDateRange(initialFormData.dateRange);
+    clearData();
   };
 
   const onSubmit = (e) => {
@@ -55,8 +59,8 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
       dateStart: getDateInFormat(dateRange[0], DateFormat.DATE_FULL),
       dateEnd: getDateInFormat(dateRange[1],DateFormat.DATE_FULL),
     };
-    //if(formIsValid) {onSubmitForm(request);}
-    onSubmitForm(request);
+    const isFormValid = validateForm(setErrors, errors, request);
+    isFormValid && submitForm(request);
   };
 
   return (
@@ -85,8 +89,9 @@ function SearchFormFlight({onSubmitForm, preselectedRequest}) {
 }
 
 SearchFormFlight.propTypes = {
-  onSubmitForm: func,
+  submitForm: func,
   preselectedRequest: object,
+  clearData: func,
 };
 
 export default SearchFormFlight;

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import countryList from 'react-select-country-list';
-import { func, string } from 'prop-types';
+import { func, string, object} from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {getCitiesByCountry} from '../../store/actions';
 import {toUpperFirstLetter} from '../../utils/common';
@@ -24,7 +24,6 @@ function CountrySelector({ setCountry, setActiveCity, title, country, activeCity
       <div className={countrySelector.fieldsWrapper}>
         <label className={countrySelector.label}>
           <span>Country</span>
-          <span className='error'>{errors[`country${title}`]}</span>
           <select
             required
             className={countrySelector.field}
@@ -35,10 +34,10 @@ function CountrySelector({ setCountry, setActiveCity, title, country, activeCity
             <option value='' disabled>Select Country</option>
             {countries?.length>0 && countries.map(({value, label})=> <option key={value} value={value} name={label}>{label}</option>)}
           </select>
+          <p className='error'>{errors[`country${title === 'To' ? title : ''}`]}</p>
         </label>
         <label className={countrySelector.label}>
           <span>City</span>
-          <span className='error'>{errors[`city${title}`]}</span>
           <select
             required
             className={countrySelector.field}
@@ -49,6 +48,7 @@ function CountrySelector({ setCountry, setActiveCity, title, country, activeCity
             <option value='' disabled>Select City</option>
             {cities?.length>0 && cities.map((item)=> <option key={item} value={item}>{item}</option>)}
           </select>
+          <p className='error'>{errors[`city${title === 'To' ? title : ''}`]}</p>
         </label>
       </div>
     </div>
@@ -61,6 +61,7 @@ CountrySelector.propTypes = {
   setActiveCity: func,
   country: string,
   activeCity: string,
+  errors: object,
 };
 
 export default CountrySelector;
