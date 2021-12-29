@@ -43,6 +43,7 @@ export const getCitiesByCountry = (country, direction) => async (dispatch) => {
     const data = response?.cities.map((item) => item.name);
     direction === 'to' ? dispatch({ type: CITIIES_LIST_TO, payload: data}) : dispatch({ type: CITIIES_LIST, payload: data});
   } else {
+    direction === 'to' ? dispatch({ type: CITIIES_LIST_TO, payload: []}) : dispatch({ type: CITIIES_LIST, payload: []});
     dispatch({ type: ERROR, payload: error });
   }
 };
