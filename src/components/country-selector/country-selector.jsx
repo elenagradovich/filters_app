@@ -15,6 +15,7 @@ function CountrySelector({ setCountry, setActiveCity, title, country, activeCity
 
   const onChangeCountry = (value) => {
     setCountry(value);
+    if(country !== value) {setActiveCity(null);}
     dispatch(getCitiesByCountry(value, title.toLowerCase()));
   };
 

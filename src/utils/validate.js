@@ -1,5 +1,5 @@
-export const validateForm = (setErrors, errors, request, changeFormIsValid) => {
-  let foormIsValid;
+export const validateForm = (setErrors, errors, request) => {
+  let foormIsValid = true;
   const fieldValidationErrors = {...errors};
 
   const checkFieldValidity = (field, value) => {
@@ -7,7 +7,6 @@ export const validateForm = (setErrors, errors, request, changeFormIsValid) => {
       foormIsValid = false;
       fieldValidationErrors[field] = 'Field is empty';
     } else {
-      foormIsValid = true;
       fieldValidationErrors[field] = '';
     }
   };
