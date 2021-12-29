@@ -5,6 +5,8 @@ import Calendar from '../calendar/calendar';
 import { DateFormat } from '../../constants/calendar';
 import {getDateInFormat} from '../../utils/dates';
 import {validateForm} from '../../utils/validate';
+import { resetResponseData } from '../../store/actions';
+import { useDispatch } from 'react-redux';
 import searchForm from './search-form.module.scss';
 
 const initialFormData = {
@@ -17,7 +19,7 @@ const initialFormData = {
 
 function SearchFormFlight({submitForm, preselectedRequest, clearData}) {
   const formRef = useRef();
-  const [formIsValid, changeFormIsValid] = useState(false);
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({
     dateStart: '',
     dateEnd: '',
@@ -51,6 +53,7 @@ function SearchFormFlight({submitForm, preselectedRequest, clearData}) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    dispatch(resetResponseData());
     const request = {
       country,
       city: city && city.toLowerCase(),

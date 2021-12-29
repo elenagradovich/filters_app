@@ -1,4 +1,4 @@
-import React,  {useRef, useState, useEffect} from 'react';
+import React,  {useRef, useState} from 'react';
 import CountrySelector from '../country-selector/country-selector';
 import DataSelect from '../data-select/data-select';
 import Calendar from '../calendar/calendar';

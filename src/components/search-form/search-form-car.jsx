@@ -6,6 +6,8 @@ import { DateFormat } from '../../constants/calendar';
 import {getDateInFormat} from '../../utils/dates';
 import {validateForm} from '../../utils/validate';
 import searchForm from './search-form.module.scss';
+import { resetResponseData } from '../../store/actions';
+import { useDispatch } from 'react-redux';
 import { func, object } from 'prop-types';
 
 const initialFormData = {
@@ -17,8 +19,8 @@ const initialFormData = {
 
 function SearchFormCar({submitForm, preselectedRequest, clearData}) {
   const formRef = useRef();
+  const dispatch = useDispatch();
   const serviceСlasses = ['economy', 'business'];
-  const [formIsValid, changeFormIsValid] = useState(false);
   const [errors, setErrors] = useState({
     dateStart: '',
     dateEnd: '',
@@ -39,10 +41,6 @@ function SearchFormCar({submitForm, preselectedRequest, clearData}) {
   const [dateRange, setDateRange] = useState(getDefaultDate());
   const [serviceСlass, setServiceСlass] = useState(preselectedRequest?.serviceСlass || initialFormData.serviceСlass);
   
-  const submitRequest = (request) => {
-    formIsValid && submitForm(request);
-  };
-  
   const onClearForm = (e) => {
     e.preventDefault();
     setCountryFrom(initialFormData.country);
@@ -54,6 +52,7 @@ function SearchFormCar({submitForm, preselectedRequest, clearData}) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    dispatch(resetResponseData());
     const request = {
       country,
       city: city && city.toLowerCase(),
