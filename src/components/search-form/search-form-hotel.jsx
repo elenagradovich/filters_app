@@ -6,6 +6,8 @@ import { DateFormat } from '../../constants/calendar';
 import {getDateInFormat} from '../../utils/dates';
 import {validateForm} from '../../utils/validate';
 import searchForm from './search-form.module.scss';
+import { resetResponseData } from '../../store/actions';
+import { useDispatch } from 'react-redux';
 import { func, object } from 'prop-types';
 
 
@@ -18,6 +20,7 @@ const initialFormData = {
 
 function SearchFormHotel({submitForm, preselectedRequest, clearData}) {
   const formRef = useRef();
+  const dispatch = useDispatch();
   const amenities = ['5', '4', '3', '2', '1'];
   const [errors, setErrors] = useState({
     dateStart: '',
@@ -50,6 +53,7 @@ function SearchFormHotel({submitForm, preselectedRequest, clearData}) {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    dispatch(resetResponseData());
     const request = {
       country,
       city: city && city.toLowerCase(),
