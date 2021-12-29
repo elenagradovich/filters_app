@@ -1,12 +1,12 @@
-import React,  {useEffect} from 'react';
+import React,  {useEffect, Fragment} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {string} from 'prop-types';
 import SearchFormFlight from './search-form-flight';
 import SearchFormHotel from './search-form-hotel';
 import SearchFormCar from './search-form-car';
 import { getDataByRequest, resetRequestData, resetResponseData } from '../../store/actions';
 import { MenuItems } from '../../constants/menu';
 import { isObjEmpty, deleteKeys } from '../../utils/obj';
+import Spinner from '../spinner/spinner';
 
 const getComponentByType = (type, submitForm, preselectedRequest, clearData) => {
   const requestType = preselectedRequest?.type;
@@ -43,6 +43,7 @@ const getComponentByType = (type, submitForm, preselectedRequest, clearData) => 
 function SearchForm() {
   const dispatch = useDispatch();
   const menuType = useSelector((state) => state.DATA.menuType);
+  const loading = useSelector((state) => state.DATA.dataLoading);
   const preselectedRequest = useSelector((state) => state.DATA.preselectedRequest);
   const submitForm = (request) => {
     dispatch(getDataByRequest(request, menuType));
@@ -60,11 +61,12 @@ function SearchForm() {
     }
   }, [preselectedRequest]);
 
-  return getComponentByType(menuType, submitForm, preselectedRequest, clearData);
+  return (
+    <Fragment>
+      {loading && <Spinner />}
+      {getComponentByType(menuType, submitForm, preselectedRequest, clearData)}
+    </Fragment>
+  );
 }
-
-SearchForm.propTypes = {
-  menuType: string,
-};
 
 export default SearchForm;

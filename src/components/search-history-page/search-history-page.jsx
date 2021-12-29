@@ -7,6 +7,7 @@ import { MenuItems } from '../../constants/menu';
 import { DateFormat } from '../../constants/calendar';
 import { getDateInFormat } from '../../utils/dates';
 import {toUpperFirstLetter} from '../../utils/common';
+import Spinner from '../spinner/spinner';
 import searchHistoryPage from './search-history-page.module.scss';
 
 const getContent = (obj) => {
@@ -53,7 +54,8 @@ const getContent = (obj) => {
 function SearchHistoryPage() {
   const dispatch = useDispatch();
   const results = useSelector((state) => state.DATA.historyResults);
-
+  const loading = useSelector((state) => state.DATA.dataLoading);
+  
   useEffect(() => {
     dispatch(getRequests());
   }, []);
@@ -67,7 +69,8 @@ function SearchHistoryPage() {
       <Header />
       <main className='container'>
         <ul>
-          {results.map((resultObj)=> (<li className={searchHistoryPage.itemWrapper} key={resultObj.id}>
+          {loading && <Spinner />}
+          {!loading && results.map((resultObj)=> (<li className={searchHistoryPage.itemWrapper} key={resultObj.id}>
             <div className={searchHistoryPage.wrapper}>
               <button className={`button button--delete ${searchHistoryPage.button}`} onClick={() => onDeleteRequestResult(resultObj.id)}></button>
               <div className={searchHistoryPage.item} onClick={() => dispatch(getPreselectedRequest(resultObj))}>

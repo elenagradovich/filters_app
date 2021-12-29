@@ -21,7 +21,7 @@ const processResponse = async (response) => {
     try {
       return humps.camelizeKeys(await response.json());
     } catch (e) {
-      return { error: { code: response.statusText }};
+      return response?.error;
     }
   }
   return { error: { code: 'Unknown Error' } };

@@ -7,6 +7,7 @@ import searchPage from './search-page.module.scss';
 
 
 function SearchPage() {
+  
   return (
     <Fragment>
       <Header />
@@ -14,7 +15,7 @@ function SearchPage() {
         <div className='container'>
           <div className={searchPage.wrapper}>
             <Menu />
-            <div>
+            <div className={searchPage.formWrapper}>
               <SearchForm />
               <SearchResults />
             </div>

@@ -7,21 +7,26 @@ import humps from 'humps';
 import browserHistory from '../history/browser-history';
 import * as RoutePath from '../constants/route-pathes';
 
-const { DATA_LOADING_START, CITIIES_LIST, CITIIES_LIST_TO,
-  DATA_LOADING_END, SEARCH_RESULTS, HISTORY_RESULTS,
+const { DATA_LOADING_START, DATA_LOADING_END, CITIIES_LIST, CITIIES_LIST_TO,
+  RESULTS_LOADING_START, RESULTS_LOADING_END, SEARCH_RESULTS, HISTORY_RESULTS,
   PRESELECTED_REQUEST, MENU_TYPE, ERROR} = ActionTypes;
 
 // actions
+export const deleteErrorMessage = () => ({
+  type: ActionTypes.ERROR,
+  payload: null,
+});
+
 export const getDataByRequest = (params, type, isForStorage=true) => async (dispatch) => {
-  dispatch({ type: DATA_LOADING_START});
+  dispatch({ type: RESULTS_LOADING_START});
   const payload = await getData(humps.decamelizeKeys(params), type);
-  dispatch({ type: DATA_LOADING_END});
+  dispatch({ type: RESULTS_LOADING_END});
   const { response, error } = payload;
   if (response) {
     isForStorage && !isObjEmpty(response) && saveToLocalStorage(params, type);
     dispatch({ type: SEARCH_RESULTS, payload: Object.values(response)});
   } else {
-    dispatch({ type: ERROR, payload: { error } });
+    dispatch({ type: ERROR, payload: error});
   }
 };
 
@@ -38,7 +43,7 @@ export const getCitiesByCountry = (country, direction) => async (dispatch) => {
     const data = response?.cities.map((item) => item.name);
     direction === 'to' ? dispatch({ type: CITIIES_LIST_TO, payload: data}) : dispatch({ type: CITIIES_LIST, payload: data});
   } else {
-    dispatch({ type: ERROR, payload: { error } });
+    dispatch({ type: ERROR, payload: error });
   }
 };
 

@@ -5,6 +5,10 @@
   padding: 20px 0;
 }
 
+.formWrapper  {
+  position: relative;
+}
+
 @media (min-width: 800px) {
   .wrapper {
     grid-template-columns: minmax(100px, 200px) 1fr;

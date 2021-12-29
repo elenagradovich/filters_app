@@ -6,11 +6,12 @@ const initialState = Immutable({
   searchResults: null,
   historyResults: [],
   dataLoading: false,
+  resultsLoading: false,
   citiesByCountry: [],
   citiesByCountryTo: [],
   menuType: MenuItems.FLIGHT,
   preselectedRequest: {},
-  errorMessage: null,
+  error: null,
 });
 
 export const reducer = (state = initialState, action = {}) => {
@@ -19,6 +20,24 @@ export const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         dataLoading: true,
+      };
+    }
+    case ActionTypes.DATA_LOADING_END:{
+      return {
+        ...state,
+        dataLoading: false,
+      };
+    }
+    case ActionTypes.RESULTS_LOADING_START:{
+      return {
+        ...state,
+        resultsLoading: true,
+      };
+    }
+    case ActionTypes.RESULTS_LOADING_END:{
+      return {
+        ...state,
+        resultsLoading: false,
       };
     }
     case ActionTypes.MENU_TYPE:{
@@ -51,7 +70,7 @@ export const reducer = (state = initialState, action = {}) => {
     case ActionTypes.ERROR:
       return {
         ...state,
-        errorMessage: action.payload,
+        error: action.payload,
       };
     case ActionTypes.PRESELECTED_REQUEST:
       return {
