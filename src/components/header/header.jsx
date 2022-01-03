@@ -12,13 +12,13 @@ function Header () {
       <div className="container">
         <nav className={header.nav_list}>
           <NavLink
-            to={ SEARCH } exact
+            to={ SEARCH }
             className={({ isActive }) => `${header.nav__item} ${isActive && header.nav__item_active}`}
             onClick={() => dispatch(resetRequestData())}
           >Search
           </NavLink>
           <NavLink
-            to={ SEARCH_HISTORY } exact
+            to={ SEARCH_HISTORY }
             className={({ isActive }) => `${header.nav__item} ${isActive && header.nav__item_active}`}
             onClick={() => dispatch(resetRequestData())}
           >Search history
