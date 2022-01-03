@@ -1,12 +1,11 @@
 
-import React, { Fragment, useEffect } from 'react';
-import Header from '../header/header';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {getRequests, deleteRequest, getPreselectedRequest} from '../../store/actions';
+import { getRequests, deleteRequest, getPreselectedRequest } from '../../store/actions';
 import { MenuItems } from '../../constants/menu';
 import { DateFormat } from '../../constants/calendar';
 import { getDateInFormat } from '../../utils/dates';
-import {toUpperFirstLetter} from '../../utils/common';
+import { toUpperFirstLetter } from '../../utils/common';
 import Spinner from '../spinner/spinner';
 import searchHistoryPage from './search-history-page.module.scss';
 
@@ -65,8 +64,6 @@ function SearchHistoryPage() {
   };
 
   return (
-    <Fragment>
-      <Header />
       <main className='container'>
         <ul>
           {loading && <Spinner />}
@@ -81,7 +78,6 @@ function SearchHistoryPage() {
         </ul>
         {(!results || results.length === 0) && <p>There are no saved requests</p>}
       </main>
-    </Fragment>
   );
 }
 
